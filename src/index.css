@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/*
+ * Always-dark theme with a pink -> purple gradient accent, matching the
+ * reference design (dark background, gradient headline text, pill nav
+ * and buttons, floating glow decoration). This replaces the previous
+ * light/dark-via-prefers-color-scheme setup with a single deliberate
+ * dark theme, since the reference has no light variant.
+ */
+:root {
+  --text: #9691a8;
+  --text-h: #f5f3fa;
+  --bg: #08070d;
+  --bg-elevated: #100e18;
+  --border: rgba(255, 255, 255, 0.08);
+  --code-bg: #15131f;
+  --accent: #c084fc;
+  --accent-2: #ec4899;
+  --gradient: linear-gradient(90deg, var(--accent-2), var(--accent));
+  --accent-bg: rgba(192, 132, 252, 0.12);
+  --accent-border: rgba(192, 132, 252, 0.4);
+  --social-bg: rgba(255, 255, 255, 0.04);
+  --shadow:
+    rgba(0, 0, 0, 0.45) 0 10px 15px -3px, rgba(0, 0, 0, 0.3) 0 4px 6px -2px;
+
+  --sans: "Plus Jakarta Sans", system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: "Space Grotesk", system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+/*
+ * The starter template centered #root and boosted heading sizes for a
+ * marketing-landing-page feel. This app is a data-dense dashboard, so
+ * we keep the shared design tokens above but reset layout/typography
+ * defaults to the more conventional left-aligned, component-driven
+ * styling used throughout src/components and src/features.
+ */
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  text-align: left;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* Gradient headline text, matching the reference's pink -> purple title */
+.text-gradient {
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/*
+ * Slow, calm drift for the ambient background blobs. Kept subtle (small
+ * travel distance, long duration, ease-in-out) so it reads as ambient
+ * atmosphere rather than something competing for attention. Each blob
+ * gets its own keyframes/timing so they don't move in lockstep.
+ */
+@keyframes drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, 6%) scale(1.08);
+  }
+}
+
+@keyframes drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-5%, 4%) scale(1.05);
+  }
+}
+
+@keyframes drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3%, -5%) scale(1.1);
+  }
+}
+
+.animate-drift-a {
+  animation: drift-a 26s ease-in-out infinite;
+}
+.animate-drift-b {
+  animation: drift-b 32s ease-in-out infinite;
+}
+.animate-drift-c {
+  animation: drift-c 22s ease-in-out infinite;
+}
+
+/* Respect reduced-motion preferences: freeze the blobs entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift-a,
+  .animate-drift-b,
+  .animate-drift-c {
+    animation: none;
+  }
+}

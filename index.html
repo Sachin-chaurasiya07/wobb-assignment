@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wobb Influencer Search</title>
+    <meta
+      name="description"
+      content="Search and shortlist influencers across Instagram, YouTube, and TikTok."
+    />
+
+    <!--
+      Baseline security hardening for a static SPA (no backend to set real
+      HTTP headers, so this is enforced via meta tags instead):
+      - CSP: only allow same-origin scripts/styles plus the two font hosts
+        and the profile-picture proxy this app actually loads images from.
+        No inline event handlers, no eval, no third-party script hosts.
+      - referrer: don't leak the full URL (which could include the search
+        query) to the external "View on platform" links.
+      - X-Content-Type-Options isn't settable via meta, but is documented
+        in the README as something to add at the hosting/CDN layer.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://imgp.sptds.icu https://yt3.googleusercontent.com https://p16-amd-va.tiktokcdn.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
