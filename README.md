@@ -1,5 +1,6 @@
 # Wobb Frontend Assignment
 
+Live Demo : https://wobb-assignment-murex.vercel.app/
 
 ## 1. Find & Fix Issues ✅
 
